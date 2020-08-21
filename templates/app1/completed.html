@@ -1,0 +1,36 @@
+{% extends 'app1/base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+<div>
+
+
+  <h2> Completed ToDos  </h2>
+
+  {% for todo in obj %}
+
+  <table class="table">
+  <tbody>
+
+    <tr class="row">
+      <td> {{ forloop.counter. }}</td>
+      <td> {% if todo.important %} <h3> {{ todo.title }} * </h3>  {% else %} <h4>{{ todo.title }}</h4>  {% endif %} </td>
+      <td> <a class="btn btn-outline btn-primary" href="{% url 'detail-view' todo.id %}">Details</a> </td>
+      <!-- <td> <a class="btn btn-outline btn-primary" href="{% url 'edit-view' todo.id %}">Edit</a>  </td>
+      <td> <a class="btn btn-outline btn-primary" href="{% url 'delete-view' todo.id %}">Delete</a>  </td>
+      <td> <a class="btn btn-outline btn-primary" href="{% url 'detail-view' todo.id %}">Mark Complete</a>  </td> -->
+    </tr>
+  </tbody>
+  </table>
+
+
+  {% endfor %}
+</div>
+
+</div>
+
+
+
+{% endblock %}

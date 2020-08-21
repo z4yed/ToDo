@@ -1,0 +1,26 @@
+{% extends 'app1/base.html' %}
+
+{% block content %}
+
+<h2 class="mt-5">Details:</h2>
+
+  <h3>[N.B. * marks represent Important ]</h3>
+
+  {% if todo.important %}
+   <h3>Title : {{ todo.title }} * </h3>
+   {% else %}
+  <h3>{{ todo.title }} </h3>
+  {% endif %}
+
+   {% if todo.description %} <h3>Description : </h3> <p class="lead"> {{ todo.description }} </p> {%endif %}
+
+   <h3>Time Created : {{ todo.time_created }}</h3>
+   {% if todo.time_completed %}
+   <h3 class="text-success"> Completion Status : YES </h3>
+   <h3> Time Completed : {{todo.time_completed}}</h3>
+   {% else  %}
+    <h3 class="text-danger"> Completion Status : No </h3>
+  {% endif %}
+
+
+{% endblock content %}

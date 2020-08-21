@@ -1,0 +1,14 @@
+{% extends 'app1/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+  <h2>Are you sure to delete "{{ obj.title }}"? </h2>
+
+  <form class="" action="{% url 'delete-view' obj.id %}" method="post">
+    {% csrf_token %}
+
+    <input class="btn btn-outline btn-danger" type="submit" name="" value="YES">
+    <a class="btn btn-outline btn-info" href="{% url 'home-view' %}">No</a>
+  </form>
+
+{% endblock %}
