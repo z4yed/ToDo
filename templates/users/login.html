@@ -14,10 +14,10 @@
 {% endif %}
 
 
-<form class="" action="{% url 'user-signup' %}" method="post">
+<form method="post">
   {% csrf_token %}
   {{ form | crispy  }}
-  <input type="submit" name="" value="Create Account">
+  <input type="submit" name="" value="Login">
 </form>
 
 {% endblock content %}
