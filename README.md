@@ -9,12 +9,12 @@
 
 ### Virtual Environment Requirements
 
-*asgiref==3.2.10
-*Django==3.1
-*django-crispy-forms==1.9.2
-*pkg-resources==0.0.0
-*pytz==2020.1
-*sqlparse==0.3.1
+* asgiref==3.2.10
+* Django==3.1
+* django-crispy-forms==1.9.2
+* pkg-resources==0.0.0
+* pytz==2020.1
+* sqlparse==0.3.1
 
 
 ### clone this repository
@@ -29,5 +29,6 @@
 ### Optionally You can create superuser to view administration site.
 
 1. python3 manage.py createsuperuser
+
 
 ## Enjoy DJANGO
