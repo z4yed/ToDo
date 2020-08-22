@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import ToDo
 from .forms import ToDoForm
 from django.utils import timezone
-from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 def homeView(request):
@@ -10,11 +11,12 @@ def homeView(request):
     context = {'todos': todos}
     return render(request, 'app1/home.html', context)
 
+@login_required
 def detailView(request, pk):
     obj = get_object_or_404(ToDo, pk=pk)
     context = {'todo': obj}
     return render(request, 'app1/details.html', context)
-
+@login_required
 def createView(request):
     form = ToDoForm()
     if request.method == "POST":
@@ -28,6 +30,7 @@ def createView(request):
     }
     return render(request, 'app1/create.html', context)
 
+@login_required
 def editView(request, pk):
     obj = get_object_or_404(ToDo, pk=pk)
     form = ToDoForm(instance = obj)
@@ -42,7 +45,7 @@ def editView(request, pk):
     }
     return render(request, 'app1/edit.html', context)
 
-
+@login_required
 def deleteView(request, pk):
     obj = get_object_or_404(ToDo, pk=pk)
     if request.method == "POST":
@@ -54,6 +57,7 @@ def deleteView(request, pk):
     }
     return render(request, 'app1/delete.html', context)
 
+@login_required
 def completedView(request):
     obj = ToDo.objects.filter(time_completed__isnull=False)
     context = {
@@ -61,6 +65,7 @@ def completedView(request):
     }
     return render(request, 'app1/completed.html', context)
 
+@login_required
 def markComplete(request, pk):
     obj = get_object_or_404(ToDo, pk=pk)
     if request.method == "POST":
