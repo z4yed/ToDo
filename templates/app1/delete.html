@@ -2,13 +2,19 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-  <h2>Are you sure to delete "{{ obj.title }}"? </h2>
+<div class="container">
+
+  <h2 class="mt-5">Are you sure to delete "{{ obj.title }}" taks? </h2>
 
   <form class="" action="{% url 'delete-view' obj.id %}" method="post">
     {% csrf_token %}
 
-    <input class="btn btn-outline btn-danger" type="submit" name="" value="YES">
-    <a class="btn btn-outline btn-info" href="{% url 'home-view' %}">No</a>
+    <input class="btn btn-outline btn-danger" type="submit" name="" value="YES"> <span>  </span>
+
+    <a class="btn btn-outline btn-info" href="{% url 'home-view' %}">Let Me Think</a>
   </form>
+
+</div>
+
 
 {% endblock %}

@@ -4,8 +4,6 @@
 
 <div class="container">
 
-<div>
-
   {% if messages  %}
 
     {% for message in messages  %}
@@ -16,30 +14,42 @@
 
   {% endif %}
 
-  <h2> Your Current ToDo {{todos|pluralize}}: {{todos.count}} <h2>
+<div class="mt-5 container jumbotron text-center">
+
+  {% if todos.count == 0 %}
+
+    <h2>Your To Do list is Empty. </h2>
+    <a class="btn btn-outline btn-info" href="{% url 'create-view' %}">Create One</a>
+
+  {% else %}
+
+  <h3 class="text-center"> Currently {{todos.count}} Task{{todos|pluralize}} Remaining. <h3>
+
+  {% endif %}
+
+</div>
+
+
 
   {% for todo in todos %}
 
-  <table class="table">
-  <tbody>
+  <h4> {{ forloop.counter }}. {% if todo.important %} {{ todo.title }}* {% else %} {{ todo.title }} {% endif %} </h4>
+  <table class="table table-striped">
+    <tbody>
+      <tr class="row text-center">
+        <td> <a class="btn btn-outline btn-primary" href="{% url 'detail-view' todo.id %}">Details</a> </td>
+        <td> <a class="btn btn-outline btn-primary" href="{% url 'edit-view' todo.id %}">Edit</a>  </td>
+        <td> <a class="btn btn-outline btn-primary" href="{% url 'delete-view' todo.id %}">Delete</a>  </td>
+        <form class="" action="{% url 'complete-todo' todo.id %}" method="post">
+            {% csrf_token %}
+        <td> <input class="btn btn-outline btn-primary" type="submit" name="" value="Mark Complete"> </td>
+        </form>
+      </tr>
+    </tbody>
+</table>
 
-    <tr class="row">
-      <td> {{ forloop.counter. }}</td>
-      <td> {% if todo.important %} <h3> {{ todo.title }} * </h3>  {% else %} <h4>{{ todo.title }}</h4>  {% endif %} </td>
-      <td> <a class="btn btn-outline btn-primary" href="{% url 'detail-view' todo.id %}">Details</a> </td>
-      <td> <a class="btn btn-outline btn-primary" href="{% url 'edit-view' todo.id %}">Edit</a>  </td>
-      <td> <a class="btn btn-outline btn-primary" href="{% url 'delete-view' todo.id %}">Delete</a>  </td>
-      <form class="" action="{% url 'complete-todo' todo.id %}" method="post">
-          {% csrf_token %}
-      <td> <input class="btn btn-outline btn-primary" type="submit" name="" value="Mark Complete"> </td>
-      </form>
-    </tr>
-  </tbody>
-  </table>
+    {% endfor %}
 
-
-  {% endfor %}
-</div>
 
 </div>
 

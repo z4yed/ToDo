@@ -2,25 +2,53 @@
 
 {% block content %}
 
-<h2 class="mt-5">Details:</h2>
 
-  <h3>[N.B. * marks represent Important ]</h3>
+  <div class="coontainer">
 
-  {% if todo.important %}
-   <h3>Title : {{ todo.title }} * </h3>
-   {% else %}
-  <h3>{{ todo.title }} </h3>
-  {% endif %}
+    <h3 class="text-primary">[N.B. Title with (*) marks represent Important ]</h3>
 
-   {% if todo.description %} <h3>Description : </h3> <p class="lead"> {{ todo.description }} </p> {%endif %}
+    <table class="table table-striped">
 
-   <h3>Time Created : {{ todo.time_created }}</h3>
-   {% if todo.time_completed %}
-   <h3 class="text-success"> Completion Status : YES </h3>
-   <h3> Time Completed : {{todo.time_completed}}</h3>
-   {% else  %}
-    <h3 class="text-danger"> Completion Status : No </h3>
-  {% endif %}
+      <tbody>
+        <tr>
+          <td>
+            {% if todo.important %}
+             <h4 class="font-weight-normal">{{ todo.title  | title }} * {% else %} {{ todo.title | title }}</h4>
+            {% endif %}
 
+          </td>
+        </tr>
+        <tr>
+          <td>
+              {% if todo.description %} <p class="lead"> {{ todo.description }} </p> {%endif %}
+          </td>
+        </tr>
+        <tr>
+          <td>
+                   <h4>Time Created : </h4>  <h4 class="text-info">{{ todo.time_created }} </h4>
+          </td>
+        </tr>
+          {% if todo.time_completed %}
+        <tr>
+          <td>
+            <h4> Completion Status </h4> <h4 class="text-success">YES</h4>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h4> Completion Time </h4> <h4 class="text-success">{{todo.time_completed}}</h4>
+          </td>
+        </tr>
+        {% else %}
+            <tr>
+              <td>
+                    <h4> Completion Status </h4> <h4 class="text-danger">NO</h4>
+              </td>
+            </tr>
+        {% endif %}
+      </tbody>
 
+    </table>
+
+  </div>
 {% endblock content %}

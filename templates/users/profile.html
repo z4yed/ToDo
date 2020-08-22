@@ -14,14 +14,23 @@
 
 {% endif %}
 
-<!-- <h2>{{user.id}}</h2> -->
+<div class="jumbotron text-center">
 
-<form action="{% url 'user-profile' user.id %}" method="post">
-{% csrf_token %}
+  <h1> Your Account Information  </h1>
 
-{{ form | crispy }}
+</div>
 
-<input type="submit" name="" value="Update Profile">
+<div class="container mb-5">
+
+
+  <form action="{% url 'user-profile' user.id %}" method="post">
+  {% csrf_token %}
+
+  {{ form | crispy }}
+
+  <input type="submit" class="btn btn-outline btn-info" name="" value="Update Profile">
+
+</div>
 
 </form>
 

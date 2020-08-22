@@ -3,6 +3,8 @@ from .models import ToDo
 from .forms import ToDoForm
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -44,6 +46,7 @@ def editView(request, pk):
         form = ToDoForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Task information Updated Successully. ')
             return redirect('home-view')
     context = {
         'obj': obj,
@@ -56,6 +59,7 @@ def deleteView(request, pk):
     obj = get_object_or_404(ToDo, pk=pk)
     if request.method == "POST":
         obj.delete()
+        messages.success(request, "Task Deleted Successfully. ")
         return redirect('home-view')
 
     context = {
@@ -67,7 +71,7 @@ def deleteView(request, pk):
 def completedView(request):
     obj = ToDo.objects.filter(time_completed__isnull=False)
     context = {
-    'obj': obj
+    'todos': obj
     }
     return render(request, 'app1/completed.html', context)
 
@@ -78,4 +82,5 @@ def markComplete(request, pk):
         obj.is_completed = True
         obj.time_completed = timezone.now()
         obj.save()
+        messages.success(request, 'Task marked as Completed. ')
         return redirect('completed-view')

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class ToDo(models.Model):
     title = models.CharField(max_length = 100)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     important = models.BooleanField(default=True)
     time_created = models.DateTimeField(auto_now_add=True, verbose_name = 'Creation Time')
     is_completed = models.BooleanField(blank=True, null=True)
