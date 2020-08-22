@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
+from .forms import UserForm
 
 # Create your views here.
 
@@ -50,4 +51,15 @@ def user_logout(request):
     if request.method == "POST":
         auth_logout(request)
         messages.info(request, "Logout Succesfull.")
-        return redirect('home-view')
+        return redirect('/')
+
+def user_profile(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method=="POST":
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile Updated Successfully. ')
+            return redirect('user-profile', pk=user.id)
+    context = { 'form' : UserForm(instance=user), 'user':user, }
+    return render(request, 'users/profile.html', context)

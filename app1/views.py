@@ -6,8 +6,12 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+def welcome(request):
+    return render(request, 'app1/welcome.html')
+
+@login_required
 def homeView(request):
-    todos = ToDo.objects.filter(time_completed__isnull=True)
+    todos = ToDo.objects.filter(time_completed__isnull=True, user=request.user)
     context = {'todos': todos}
     return render(request, 'app1/home.html', context)
 
@@ -22,7 +26,9 @@ def createView(request):
     if request.method == "POST":
         form = ToDoForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_todo = form.save(commit=False)
+            new_todo.user = request.user
+            new_todo.save()
             return redirect('home-view')
 
     context = {

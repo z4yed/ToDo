@@ -1,0 +1,29 @@
+{% extends 'app1/base.html' %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+{% if messages  %}
+
+  {% for message in messages  %}
+
+    <div class="alert alert-{{message.tags}}"> {{message}} </div>
+
+  {% endfor %}
+
+{% endif %}
+
+<!-- <h2>{{user.id}}</h2> -->
+
+<form action="{% url 'user-profile' user.id %}" method="post">
+{% csrf_token %}
+
+{{ form | crispy }}
+
+<input type="submit" name="" value="Update Profile">
+
+</form>
+
+
+{% endblock content %}

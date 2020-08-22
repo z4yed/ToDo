@@ -1,10 +1,11 @@
 
 from django.urls import path, include
-from .views import homeView, detailView, createView, editView,deleteView, completedView, markComplete
+from .views import homeView, detailView, createView, editView,deleteView, completedView, markComplete, welcome
 
 urlpatterns = [
 
-    path('', homeView, name = 'home-view'),
+    path('', welcome, name="welcome-view"),
+    path('view/', homeView, name = 'home-view'),
     path('create/', createView, name = 'create-view'),
     path('todo/<int:pk>/', detailView, name = 'detail-view'),
     path('todo/<int:pk>/edit/', editView, name='edit-view'),
