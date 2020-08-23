@@ -4,7 +4,7 @@
 
 ### Install virtualenv and activate it
 1. sudo apt install virtualenv python3-pip
-2. virtualenv .venv
+2. virtualenv -p python3 .venv
 3. source .venv/bin/activate
 
 ### Virtual Environment Requirements
@@ -29,6 +29,7 @@
 ### Optionally You can create superuser to view administration site.
 
 1. python3 manage.py createsuperuser
+2. visit [Admin Panel](http://127.0.0.1:8000/)
 
 
 ## Enjoy DJANGO
